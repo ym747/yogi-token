@@ -2,5 +2,16 @@
   "name": "YOGI Token",
   "symbol": "YOGI",
   "description": "A community-driven token empowering fair microloans and financial inclusivity on Solana.",
-  "image": "https://yourgithubusername.github.io/yogi-token/YOGI.JPG"
+  "image": "https://ym747.github.io/yogi-token/YOGI.JPG",
+  "external_url": "https://ym747.github.io/yogi-token/",
+  "attributes": [],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://ym747.github.io/yogi-token/YOGI.JPG",
+        "type": "image/jpeg"
+      }
+    ],
+    "category": "image"
+  }
 }
