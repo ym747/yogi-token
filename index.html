@@ -10,52 +10,46 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Fonts -->
   <style>
     body, html {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      scroll-behavior: smooth;
-      background: #f5f5f5;
-      color: #1c1c1c;
+      background: url('YOGI.JPG') center center / cover no-repeat fixed;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    /* Header / Hero Section */
-    header {
+    /* Overlay for better readability */
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1;
+    }
+
+    /* Hero Content */
+    .hero {
       position: relative;
-      height: 70vh;
-      background: linear-gradient(to bottom, #d0d0d0, #f5f5f5);
+      z-index: 2;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      transition: height 0.5s ease;
-      overflow: hidden;
       padding: 2rem;
     }
 
-    header.scrolled {
-      height: 35vh;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      padding: 0 1rem;
-    }
-
-    /* Breathing / Typing Effect */
     .breathing-text {
-      font-size: clamp(2rem, 8vw, 5rem); /* scales dynamically */
+      font-size: clamp(3rem, 10vw, 6rem);
       font-weight: 800;
-      line-height: 1.1;
-      color: #111;
-      display: inline-block;
       animation: breathe 2s ease-in-out infinite;
       overflow: hidden;
       white-space: nowrap;
-      border-right: 0.15em solid #111;
+      border-right: 0.15em solid #fff;
       letter-spacing: 0.05em;
+      margin-bottom: 2rem;
     }
 
     @keyframes breathe {
@@ -63,60 +57,60 @@
       50% { transform: scale(1.05); }
     }
 
-    /* Info Section */
-    section.info-section {
-      padding: 5rem 2rem;
-      background: #f0f0f0;
-      text-align: center;
-    }
-
-    section.info-section h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    section.info-section p {
-      font-size: 1.15rem;
+    .description {
       max-width: 800px;
-      margin: auto;
-      line-height: 1.7;
-      color: #444;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.8;
+      color: #f0f0f0;
+      margin-bottom: 3rem;
     }
 
-    a.metadata-link {
-      color: #007bff;
-      text-decoration: none;
-      font-weight: 500;
+    /* Rocket */
+    .rocket {
+      width: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    a.metadata-link:hover {
-      text-decoration: underline;
+    .rocket.launch {
+      animation: takeoff 3s forwards;
+    }
+
+    @keyframes takeoff {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+      50% { transform: translateY(-200px) rotate(15deg) scale(1.1); opacity: 1; }
+      100% { transform: translateY(-1500px) rotate(0deg) scale(0.5); opacity: 0; }
+    }
+
+    @media(max-width: 768px){
+      .rocket { width: 50px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header / Hero Section -->
-  <header id="header">
-    <div class="hero-content">
-      <div class="breathing-text" id="typing-text"></div>
-      <p class="mt-4">The YOGI Coin evolves around community lending. Participants can earn by staking, lending, and contributing to the ecosystem. Revenue comes from transaction fees, lending interest, and staking rewards shared with the community.</p>
-    </div>
-  </header>
+  <div class="overlay"></div>
 
-  <!-- Info Section -->
-  <section class="info-section">
-    <h2>How YOGI Token Works</h2>
-    <p>YOGI Token empowers the community by letting users lend, stake, and earn. The more the community participates, the stronger the ecosystem grows. Every transaction contributes to liquidity, staking rewards, and platform sustainability.</p>
-    <p>View the token metadata: <a href="https://ym747.github.io/yogi-token/metadata.json" class="metadata-link" target="_blank">YOGI Metadata JSON</a></p>
-  </section>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="breathing-text" id="typing-text"></div>
+    <p class="description">
+      YOGI Token is a community-driven lending and staking token designed to empower everyone in the ecosystem.
+      By participating, you can earn rewards from staking, lending, and transaction fees. The more the community engages,
+      the stronger and more sustainable the ecosystem becomes. This token prioritizes transparency, decentralization,
+      and growth for all holders. Join the evolution and be part of a token that truly revolves around its community.
+    </p>
+    <img src="rocket.png" alt="Rocket" class="rocket" id="rocket">
+  </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Metadata link at bottom -->
+  <div class="text-center mb-5">
+    <a href="https://ym747.github.io/yogi-token/metadata.json" target="_blank" style="color: #fff; font-weight: 500;">View Metadata JSON</a>
+  </div>
 
-  <!-- Typing JS -->
+  <!-- Scripts -->
   <script>
+    // Typing effect
     const textElement = document.getElementById('typing-text');
     const textToType = "YOGI TOKEN";
     let index = 0;
@@ -125,26 +119,22 @@
       if(index < textToType.length){
         textElement.innerHTML += textToType.charAt(index);
         index++;
-        setTimeout(typeEffect, 150); // typing speed
+        setTimeout(typeEffect, 150);
       } else {
-        setTimeout(() => { // erase and repeat
+        setTimeout(() => {
           textElement.innerHTML = '';
           index = 0;
           typeEffect();
-        }, 2000); 
+        }, 2000);
       }
     }
-
     typeEffect();
 
-    // Shrink header on scroll
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+    // Rocket animation
+    const rocket = document.getElementById('rocket');
+    rocket.addEventListener('click', () => {
+      rocket.classList.add('launch');
+      setTimeout(() => { rocket.classList.remove('launch'); }, 3000); // reset after animation
     });
   </script>
 
