@@ -20,7 +20,6 @@
       overflow-x: hidden;
     }
 
-    /* Overlay for better readability */
     .overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -28,7 +27,6 @@
       z-index: 1;
     }
 
-    /* Hero Content */
     .hero {
       position: relative;
       z-index: 2;
@@ -65,7 +63,6 @@
       margin-bottom: 3rem;
     }
 
-    /* Rocket */
     .rocket {
       width: 80px;
       cursor: pointer;
@@ -85,6 +82,16 @@
     @media(max-width: 768px){
       .rocket { width: 50px; }
     }
+
+    .links a {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .card-text { color: #fff; }
   </style>
 </head>
 <body> 
@@ -102,9 +109,21 @@
     <img src="rocket.png" alt="Rocket" class="rocket" id="rocket">
   </div>
 
-  <!-- Metadata link at bottom -->
-  <div class="text-center mb-5">
-    <a href="https://ym747.github.io/yogi-token/metadata.json" target="_blank" style="color: #fff; font-weight: 500;">View Metadata JSON</a>
+  <!-- Metadata & PDF Links -->
+  <div class="text-center mb-5 links">
+    <a href="https://ym747.github.io/yogi-token/metadata.json" target="_blank">View Metadata JSON</a>
+    <a href="YOGI TOKEN WHITEPAPER.pdf" download>Download YOGI TOKEN WHITEPAPER.pdf</a>
+  </div>
+
+  <!-- Testimony Section -->
+  <div class="container text-center my-5">
+    <h2 class="mb-4">Community Testimony</h2>
+    <div class="card mx-auto" style="max-width: 400px; background: rgba(0,0,0,0.6); border: none;">
+      <img src="yogitoken.JPG" class="card-img-top" alt="YOGI Token Snapshot">
+      <div class="card-body">
+        <p class="card-text">Snapshot of the YOGI Token community engagement and ecosystem in action.</p>
+      </div>
+    </div>
   </div>
 
   <!-- Scripts -->
@@ -133,9 +152,8 @@
     const rocket = document.getElementById('rocket');
     rocket.addEventListener('click', () => {
       rocket.classList.add('launch');
-      setTimeout(() => { rocket.classList.remove('launch'); }, 3000); // reset after animation
+      setTimeout(() => { rocket.classList.remove('launch'); }, 3000);
     });
   </script>
-
 </body>
 </html>
